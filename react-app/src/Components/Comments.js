@@ -2,17 +2,18 @@ import {useState} from "react";
 import axios from "axios";
 
 const Comments = ({ postId, comments: initialComments }) => {
-  const [_________, _________] = useState(initialComments);
+  const [comments, setComments] = useState(initialComments);
   const [newComment, setNewComment] = useState('');
 
   const handleSubmitComment = () => {
     console.log(newComment)
     // Un-comment the lines below to complete your solution
     // ====================
-    // axios.post(__________________, { newComment }).then((res) => {
-    //   ________________;
-    //   ________________
-    // })
+    //change the states to reflect the new comment and clear the newComment state
+     axios.post(`http://localhost:3002/post/${postId}/comment`, { newComment }).then((res) => {
+       setComments(res.data.comments); //updating with new list of comments
+       setNewComment('') //clearing text box 
+     })
   }
 
   return (
